@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_home" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="url">/my/tes_portal</t>
+                <t t-set="title">Web Test</t>
+                <t t-set="placeholder_count" t-value="'employee_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'view_tes_portal'" class="breadcrumb-item">Employees</li>
+        </xpath>
+    </template>
+
+    <template id="view_tes_portal">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Name</th>
+                        <th class="text-center">No Telepon</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Department</th>
+                    </tr>
+                </thead>
+                <t>
+                    <t t-foreach="employees" t-as="employee">
+                        <tr>
+                            <td class="text-center">
+                                <t t-esc="employee.name"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="employee.work_phone"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="employee.work_email"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="employee.department_id.name"/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
