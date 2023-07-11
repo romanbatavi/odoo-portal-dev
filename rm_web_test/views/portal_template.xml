@@ -6,47 +6,93 @@
             <t t-call="portal.portal_docs_entry">
                 <t t-set="url">/my/tes_portal</t>
                 <t t-set="title">Web Test</t>
-                <t t-set="placeholder_count" t-value="'employee_count'"/>
+                <t t-set="placeholder_count" t-value="'product_count'"/>
             </t>
         </xpath>
     </template>
 
     <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'view_tes_portal'" class="breadcrumb-item">Employees</li>
+            <li t-if="page_name == 'view_tes_product'" class="breadcrumb-item">Products</li>
         </xpath>
     </template>
 
-    <template id="view_tes_portal">
-        <t t-call="portal.portal_layout">
-            <t t-call="portal.portal_table">
-                <thead>
-                    <tr class="active">
-                        <th class="text-center">Name</th>
-                        <th class="text-center">No Telepon</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Department</th>
-                    </tr>
-                </thead>
-                <t>
-                    <t t-foreach="employees" t-as="employee">
-                        <tr>
-                            <td class="text-center">
-                                <t t-esc="employee.name"/>
-                            </td>
-                            <td class="text-center">
-                                <t t-esc="employee.work_phone"/>
-                            </td>
-                            <td class="text-center">
-                                <t t-esc="employee.work_email"/>
-                            </td>
-                            <td class="text-center">
-                                <t t-esc="employee.department_id.name"/>
-                            </td>
-                        </tr>
-                    </t>
-                </t>
-            </t>
+    <template id="view_tes_product">
+        <t t-call="website.layout">
+            <section style="background-color: #eee;">
+                <div class="text-center container py-5">
+                    <h4 class="mt-4 mb-5">
+                        <strong>Products</strong>
+                    </h4>
+                    <div class="row">
+                        <t>
+                            <t t-foreach="products" t-as="product">
+                                <div class="col-lg-4 col-md-12 mb-4">
+                                    <div class="card">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
+                                            <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" style="max-height: 150px;" />
+                                            <a href="#!">
+                                                <div class="mask">
+                                                    <div class="d-flex justify-content-start align-items-end h-100">
+                                                        <h5>
+                                                            <span class="badge bg-primary ms-2">New</span>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="hover-overlay">
+                                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <a href="" class="text-reset">
+                                                <h5 class="card-title mb-3">
+                                                    <t t-esc="product.name"/>
+                                                </h5>
+                                            </a>
+                                            <a href="" class="text-reset">
+                                                <p>
+                                                    <t t-esc="product.categ_id.name"/>
+                                                </p>
+                                            </a>
+                                            <h6 class="mb-3">
+                                                <t t-esc="product.list_price"/>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </section>
         </t>
     </template>
+
+    <!-- <template id="view_tes_product">
+        <t t-call="website.layout">
+            <table border="3">
+                <t t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th class="text-center">Nama Barang</th>
+                            <th class="text-center">Harga Barang</th>
+                        </tr>
+                    </thead>
+                    <t>
+                        <t t-foreach="products" t-as="product">
+                            <tr>
+                                <td class="text-center">
+                                    <t t-esc="product.name"/>
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="product.list_price"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </t>
+            </table>
+        </t>
+    </template> -->
 </odoo>
