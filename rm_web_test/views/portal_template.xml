@@ -107,6 +107,18 @@
                                         <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
+                                                    <p class="mb-0">Barcode</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">
+                                                        <t t-esc="product.barcode"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                        <!-- <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
                                                     <p class="mb-0">Product Type</p>
                                                 </div>
                                                 <div class="col-sm-9">
@@ -115,7 +127,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                        </hr>
+                                        </hr> -->
                                         <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
@@ -152,6 +164,14 @@
 
     <template id="view_create_form_tes_product">
         <t t-call="website.layout">
+            <div class="alert alert-success" role="alert" t-if="success_message">
+                <t t-esc="success_message"/>
+            </div>
+            <t t-foreach="error_list" t-as="error">
+                <div class="alert alert-danger" role="alert">
+                    <t t-esc="error"/>
+                </div>
+            </t>
             <form method="post">
                 <section style="background-color: #eee;">
                     <div class="row">
@@ -159,7 +179,8 @@
                             <div class="card mb-4">
                                 <div class="card-body text-center">
                                     <!-- <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" alt="avatar" style="width: 135px;"/> -->
-                                    <!-- <input type="file" name="image" class="file" multiple="true" data-show-upload="true" data-show-caption="true" lass="file" data-show-preview="true"/> -->
+                                    <!-- <input type="file" name="image_1920" class="file" multiple="true" data-show-upload="true" data-show-caption="true" class="file" data-show-preview="true"/> -->
+                                    <input id="image_1920" name="image_1920" type="file" class="file" data-show-preview="false"/>
                                     <h5 class="my-3">
                                         <!-- <t t-esc="product.name"/> -->
                                     </h5>
@@ -177,40 +198,33 @@
                                             <p class="mb-0">Product</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                                <input type="char" name="name" id="name"/>
-                                            </p>
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input type="char" name="name" id="name"/>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <!-- <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <p class="mb-0">Product Type</p>
                                             </div>
                                             <div class="col-sm-9">
                                                 <p class="text-muted mb-0">
-                                                    <!-- <select class="form-control" name="type">
-                                                    <t t-foreach="products" t-as="product">
-                                                        <option t-attf-value="#{product.id}">
-                                                            <t t-esc="product.type"/>
-                                                        </option>
-                                                    </t>
-                                                </select> -->
-                                                    <!-- <select name="type" id="type">
-                                                    <option>Product Type Selection</option>
-                                                    <t t-foreach="products" t-as="product">
-                                                        <option t-att-value="product.id">
-                                                            <t t-esc="product.type"/>
-                                                        </option>
-                                                    </t>
-                                                </select> -->
                                                     <select name="type" id="type">
                                                         <option>Product Type Selection</option>
                                                         <option t-attf-value="'consu'">Consumable</option>
                                                         <option t-attf-value="'service'">Service</option>
                                                     </select>
                                                 </p>
+                                            </div>
+                                        </div>
+                                    </hr> -->
+                                    <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Barcode</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="char" name="barcode" id="barcode"/>
                                             </div>
                                         </div>
                                     </hr>
@@ -220,9 +234,7 @@
                                                 <p class="mb-0">Internal Reference</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <input type="char" name="default_code" id="default_code"/>
-                                                </p>
+                                                <input type="char" name="default_code" id="default_code"/>
                                             </div>
                                         </div>
                                     </hr>
@@ -232,9 +244,7 @@
                                                 <p class="mb-0">Price</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <input type="char" name="lst_price" id="lst_price"/>
-                                                </p>
+                                                <input type="char" name="lst_price" id="lst_price"/>
                                             </div>
                                         </div>
                                     </hr>
