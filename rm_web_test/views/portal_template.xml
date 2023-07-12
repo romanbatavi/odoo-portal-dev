@@ -4,7 +4,7 @@
     <template id="portal_my_home" inherit_id="portal.portal_my_home">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
-                <t t-set="url">/my/tes_portal</t>
+                <t t-set="url">/my/tes_product</t>
                 <t t-set="title">Web Test</t>
                 <t t-set="placeholder_count" t-value="'product_count'"/>
             </t>
@@ -31,30 +31,30 @@
                                     <div class="card">
                                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
                                             <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" style="max-height: 150px;" />
-                                            <a href="#!">
-                                                <div class="mask">
-                                                    <div class="d-flex justify-content-start align-items-end h-100">
-                                                        <h5>
-                                                            <span class="badge bg-primary ms-2">New</span>
-                                                        </h5>
-                                                    </div>
+                                            <!-- <a href="#!"> -->
+                                            <div class="mask">
+                                                <div class="d-flex justify-content-start align-items-end h-100">
+                                                    <h5>
+                                                        <span class="badge bg-primary ms-2">New</span>
+                                                    </h5>
                                                 </div>
-                                                <div class="hover-overlay">
-                                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                                </div>
-                                            </a>
+                                            </div>
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                            </div>
+                                            <!-- </a> -->
                                         </div>
                                         <div class="card-body">
-                                            <a href="" class="text-reset">
-                                                <h5 class="card-title mb-3">
+                                            <h5 class="card-title mb-3">
+                                                <a t-attf-href="/my/tes_product/#{product.id}">
                                                     <t t-esc="product.name"/>
-                                                </h5>
-                                            </a>
-                                            <a href="" class="text-reset">
-                                                <p>
-                                                    <t t-esc="product.categ_id.name"/>
-                                                </p>
-                                            </a>
+                                                </a>
+                                            </h5>
+                                            <!-- <a href="" class="text-reset"> -->
+                                            <p>
+                                                <t t-esc="product.categ_id.name"/>
+                                            </p>
+                                            <!-- </a> -->
                                             <h6 class="mb-3">
                                                 <t t-esc="product.list_price"/>
                                             </h6>
@@ -69,30 +69,87 @@
         </t>
     </template>
 
-    <!-- <template id="view_tes_product">
+    <template id="view_form_tes_product">
         <t t-call="website.layout">
-            <table border="3">
-                <t t-call="portal.portal_table">
-                    <thead>
-                        <tr class="active">
-                            <th class="text-center">Nama Barang</th>
-                            <th class="text-center">Harga Barang</th>
-                        </tr>
-                    </thead>
-                    <t>
+            <t t-if="page_name == 'view_form_product'">
+                <section style="background-color: #eee;">
+                    <div class="row">
                         <t t-foreach="products" t-as="product">
-                            <tr>
-                                <td class="text-center">
-                                    <t t-esc="product.name"/>
-                                </td>
-                                <td class="text-center">
-                                    <t t-esc="product.list_price"/>
-                                </td>
-                            </tr>
+
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-body text-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"/>
+                                        <h5 class="my-3">John Smith</h5>
+                                        <p class="text-muted mb-1">Full Stack Developer</p>
+                                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <button type="button" class="btn btn-primary">Follow</button>
+                                            <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Full Name</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-esc="product.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Email</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">example@example.com</p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                        <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Phone</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">(097) 234-5678</p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                        <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Mobile</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">(098) 765-4321</p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                        <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Address</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                    </div>
+                                </div>
+                            </div>
                         </t>
-                    </t>
-                </t>
-            </table>
+                    </div>
+                </section>
+            </t>
         </t>
-    </template> -->
+    </template>
 </odoo>
