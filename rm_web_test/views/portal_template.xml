@@ -21,8 +21,11 @@
         <t t-call="website.layout">
             <section style="background-color: #eee;">
                 <div class="text-center container py-5">
+                    <a t-attf-href="/my/tes_product/new_tes_product">
+                        <button type="button" class="btn btn-primary">Create Product</button>
+                    </a>
                     <h4 class="mt-4 mb-5">
-                        <strong>Products</strong>
+                        <strong>Our Products</strong>
                     </h4>
                     <div class="row">
                         <t>
@@ -30,8 +33,7 @@
                                 <div class="col-lg-4 col-md-12 mb-4">
                                     <div class="card">
                                         <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                                            <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" style="max-height: 150px;" />
-                                            <!-- <a href="#!"> -->
+                                            <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" style="max-height: 150px;"/>
                                             <div class="mask">
                                                 <div class="d-flex justify-content-start align-items-end h-100">
                                                     <h5>
@@ -42,7 +44,6 @@
                                             <div class="hover-overlay">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                             </div>
-                                            <!-- </a> -->
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title mb-3">
@@ -50,11 +51,9 @@
                                                     <t t-esc="product.name"/>
                                                 </a>
                                             </h5>
-                                            <!-- <a href="" class="text-reset"> -->
                                             <p>
                                                 <t t-esc="product.categ_id.name"/>
                                             </p>
-                                            <!-- </a> -->
                                             <h6 class="mb-3">
                                                 <t t-esc="product.list_price"/>
                                             </h6>
@@ -75,17 +74,19 @@
                 <section style="background-color: #eee;">
                     <div class="row">
                         <t t-foreach="products" t-as="product">
-
                             <div class="col-lg-4">
                                 <div class="card mb-4">
                                     <div class="card-body text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"/>
-                                        <h5 class="my-3">John Smith</h5>
-                                        <p class="text-muted mb-1">Full Stack Developer</p>
-                                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                        <!-- <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"/> -->
+                                        <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" alt="avatar" style="width: 135px;"/>
+                                        <h5 class="my-3">
+                                            <t t-esc="product.name"/>
+                                        </h5>
+                                        <!-- <p class="text-muted mb-1">Full Stack Developer</p>
+                                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->
                                         <div class="d-flex justify-content-center mb-2">
-                                            <button type="button" class="btn btn-primary">Follow</button>
-                                            <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <!-- <button type="button" class="btn btn-outline-primary ms-1">Message</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +96,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <p class="mb-0">Full Name</p>
+                                                <p class="mb-0">Product</p>
                                             </div>
                                             <div class="col-sm-9">
                                                 <p class="text-muted mb-0">
@@ -106,40 +107,36 @@
                                         <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <p class="mb-0">Email</p>
+                                                    <p class="mb-0">Product Type</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">example@example.com</p>
+                                                    <p class="text-muted mb-0">
+                                                        <t t-esc="{False: False, 'consu': 'Consumable', 'service': 'Service'}[product.type]"/>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </hr>
                                         <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <p class="mb-0">Phone</p>
+                                                    <p class="mb-0">Internal Reference</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">(097) 234-5678</p>
+                                                    <p class="text-muted mb-0">
+                                                        <t t-esc="product.default_code"/>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </hr>
                                         <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <p class="mb-0">Mobile</p>
+                                                    <p class="mb-0">Price</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">(098) 765-4321</p>
-                                                </div>
-                                            </div>
-                                        </hr>
-                                        <hr>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <p class="mb-0">Address</p>
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                                    <p class="text-muted mb-0">
+                                                        <t t-esc="product.lst_price"/>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </hr>
@@ -150,6 +147,103 @@
                     </div>
                 </section>
             </t>
+        </t>
+    </template>
+
+    <template id="view_create_form_tes_product">
+        <t t-call="website.layout">
+            <form method="post">
+                <section style="background-color: #eee;">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body text-center">
+                                    <!-- <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" alt="avatar" style="width: 135px;"/> -->
+                                    <!-- <input type="file" name="image" class="file" multiple="true" data-show-upload="true" data-show-caption="true" lass="file" data-show-preview="true"/> -->
+                                    <h5 class="my-3">
+                                        <!-- <t t-esc="product.name"/> -->
+                                    </h5>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Product</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                <input type="char" name="name" id="name"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Product Type</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <!-- <select class="form-control" name="type">
+                                                    <t t-foreach="products" t-as="product">
+                                                        <option t-attf-value="#{product.id}">
+                                                            <t t-esc="product.type"/>
+                                                        </option>
+                                                    </t>
+                                                </select> -->
+                                                    <!-- <select name="type" id="type">
+                                                    <option>Product Type Selection</option>
+                                                    <t t-foreach="products" t-as="product">
+                                                        <option t-att-value="product.id">
+                                                            <t t-esc="product.type"/>
+                                                        </option>
+                                                    </t>
+                                                </select> -->
+                                                    <select name="type" id="type">
+                                                        <option>Product Type Selection</option>
+                                                        <option t-attf-value="'consu'">Consumable</option>
+                                                        <option t-attf-value="'service'">Service</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </hr>
+                                    <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Internal Reference</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <input type="char" name="default_code" id="default_code"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </hr>
+                                    <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Price</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <input type="char" name="lst_price" id="lst_price"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
         </t>
     </template>
 </odoo>

@@ -9,11 +9,12 @@ class WebTestPortal(CustomerPortal):
         ret = super(WebTestPortal, self)._prepare_home_portal_values(counters)
         ret['product_count'] = request.env['product.product'].sudo().search_count([])
         return ret
-
-    # @http.route(['/my/tes_product'], type='http')
-    # def tesportalview(self, **kw):
-    #     print("HALO SEMUANYA")
-    #     return "HALO SEMUANYA"
+    
+    @http.route(['/my/tes_product/new_tes_product'], methods=["POST","GET"], type='http', auth="user", website=True)
+    def new_tes_product(self, **kw):
+        prod = request.env['product.product'].search([])
+        print(kw)
+        return request.render('rm_web_test.view_create_form_tes_product', {'products': prod})
     
     @http.route(['/my/tes_product'], type='http', website=True)
     def tes_product(self, **kw):
