@@ -17,7 +17,7 @@
         </xpath>
     </template>
 
-    <template id="view_tes_product">
+    <template id="view_tes_product" name="Product">
         <t t-call="website.layout">
             <section style="background-color: #eee;">
                 <div class="text-center container py-5">
@@ -68,7 +68,7 @@
         </t>
     </template>
 
-    <template id="view_form_tes_product">
+    <template id="view_form_tes_product" name="Detail Product">
         <t t-call="website.layout">
             <t t-if="page_name == 'view_form_product'">
                 <section style="background-color: #eee;">
@@ -116,18 +116,6 @@
                                                 </div>
                                             </div>
                                         </hr>
-                                        <!-- <hr>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <p class="mb-0">Product Type</p>
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">
-                                                        <t t-esc="{False: False, 'consu': 'Consumable', 'service': 'Service'}[product.type]"/>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </hr> -->
                                         <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
@@ -162,7 +150,7 @@
         </t>
     </template>
 
-    <template id="view_create_form_tes_product">
+    <template id="view_create_form_tes_product" name="Create Product">
         <t t-call="website.layout">
             <div class="alert alert-success" role="alert" t-if="success_message">
                 <t t-esc="success_message"/>
@@ -178,12 +166,14 @@
                         <div class="col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body text-center">
-                                    <!-- <img t-if="product.image_1920" t-att-src="image_data_uri(product.image_1920)" alt="avatar" style="width: 135px;"/> -->
-                                    <!-- <input type="file" name="image_1920" class="file" multiple="true" data-show-upload="true" data-show-caption="true" class="file" data-show-preview="true"/> -->
-                                    <input id="image_1920" name="image_1920" type="file" class="file" data-show-preview="false"/>
-                                    <h5 class="my-3">
-                                        <!-- <t t-esc="product.name"/> -->
-                                    </h5>
+                                    <div class="picture-container">
+                                        <div class="picture">
+                                            <img class="picture-src" id="wizardPicturePreview" title="" />
+                                            <input type="file" id="wizard-picture" class="" accept="image/*" />
+                                            <input style="display: none;" type="char" name="base64_picture" id="base64_picture" />
+                                        </div>
+                                        <span>Change Profile Picture</span>
+                                    </div>
                                     <div class="d-flex justify-content-center mb-2">
                                         <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
@@ -202,22 +192,6 @@
                                             <input type="char" name="name" id="name"/>
                                         </div>
                                     </div>
-                                    <!-- <hr>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <p class="mb-0">Product Type</p>
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <select name="type" id="type">
-                                                        <option>Product Type Selection</option>
-                                                        <option t-attf-value="'consu'">Consumable</option>
-                                                        <option t-attf-value="'service'">Service</option>
-                                                    </select>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </hr> -->
                                     <hr>
                                         <div class="row">
                                             <div class="col-sm-3">

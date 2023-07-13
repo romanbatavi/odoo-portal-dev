@@ -30,6 +30,7 @@ class WebTestPortal(CustomerPortal):
                     "barcode": kw.get("barcode"),
                     "default_code": kw.get("default_code"),
                     "lst_price": kw.get("lst_price"),
+                    "image_1920": kw.get("image_1920"),
                 })
                 success = "Insert Product Success"
                 vals['success_message'] = success
