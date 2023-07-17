@@ -1,24 +1,10 @@
 <odoo>
-    <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
-    </data>
+  <data>
+    <template id="assets_frontend" name="purchase assets" inherit_id="web.assets_frontend">
+      <xpath expr="." position="inside">
+        <script type="text/javascript" src="/rm_web_test/static/src/js/convert_image.js"></script>
+        <script type="text/javascript" src="/rm_web_test/static/src/js/dynamic_table.js"></script>
+      </xpath>
+    </template>
+  </data>
 </odoo>

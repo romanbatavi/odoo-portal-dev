@@ -73,7 +73,7 @@
             <t t-if="page_name == 'view_form_product'">
                 <div>
                     <a t-attf-href="/my/tes_product/">
-                        <button type="button" class="btn btn-primary">Back</button>
+                        <button type="button" class="btn btn-success">Back</button>
                     </a>
                 </div>
                 <section style="background-color: #eee;">
@@ -87,7 +87,7 @@
                                             <t t-esc="product.name"/>
                                         </h5>
                                         <div class="d-flex justify-content-center mb-2">
-                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <!-- <button type="button" class="btn btn-primary">Edit</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -163,10 +163,10 @@
             </t>
             <div>
                 <a t-attf-href="/my/tes_product/">
-                    <button type="button" class="btn btn-primary">Back</button>
+                    <button type="button" class="btn btn-success">Back</button>
                 </a>
             </div>
-            <form method="post">
+            <form method="post" class="class-create-product">
                 <section style="background-color: #eee;">
                     <div class="row">
                         <div class="col-lg-4">
@@ -174,7 +174,7 @@
                                 <div class="card-body text-center">
                                     <div class="picture-container">
                                         <div class="picture">
-                                            <img class="picture-src" id="wizardPicturePreview" title="" />
+                                            <img class="picture-src" id="wizardPicturePreview" title="" style="max-height: 400px;"/>
                                             <input type="file" id="wizard-picture" class="" accept="image/*" />
                                             <input style="display: none;" type="char" name="base64_picture" id="base64_picture" />
                                         </div>
@@ -230,6 +230,54 @@
                                     </hr>
                                 </div>
                             </div>
+                            <!-- O2M -->
+                            <form>
+                                <input type="text" id="name" placeholder="Name"/>
+                                <input type="text" id="email" placeholder="Email"/>
+                                <input type="button" class="add-row" value="Add Row"/>
+                            </form>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="record"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="delete-row">Delete Row</button>
+                            <!-- <body>
+                                <div class="container pt-4">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="table-primary">
+                                                <tr>
+                                                    <th scope="col">Vendor</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Delivery Lead Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="table-secondary">
+                                                    <th scope="row">Default</th>
+                                                    <td>Cell</td>
+                                                    <td>Cell</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button class="btn btn-md btn-primary" id="addBtn" type="button">
+      Add new Row
+                                    </button>
+                                </div>
+                            </body> -->
                         </div>
                     </div>
                 </section>
