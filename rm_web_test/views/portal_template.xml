@@ -195,7 +195,7 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                            <input type="char" name="name" id="name"/>
+                                            <input type="char" class="form-control" name="name" id="name"/>
                                         </div>
                                     </div>
                                     <hr>
@@ -204,7 +204,7 @@
                                                 <p class="mb-0">Barcode</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="char" name="barcode" id="barcode"/>
+                                                <input type="char" class="form-control" name="barcode" id="barcode"/>
                                             </div>
                                         </div>
                                     </hr>
@@ -214,7 +214,7 @@
                                                 <p class="mb-0">Internal Reference</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="char" name="default_code" id="default_code"/>
+                                                <input type="char" class="form-control" name="default_code" id="default_code"/>
                                             </div>
                                         </div>
                                     </hr>
@@ -224,7 +224,7 @@
                                                 <p class="mb-0">Price</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="char" name="lst_price" id="lst_price"/>
+                                                <input type="char" class="form-control" name="lst_price" id="lst_price"/>
                                             </div>
                                         </div>
                                     </hr>
