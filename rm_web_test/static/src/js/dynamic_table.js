@@ -23,8 +23,8 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
         
         _onSaveModal() {
             var flag_error = false;
-            var vendor = $('#vendor:selected').val();
-            var vendor_string = $('#vendor: selected').text();
+            var vendor = $('#vendor').val();
+            var vendor_string = $('#vendor:selected').text();
             var price = $('#price').val();
             var dlt = $('#dlt').val();
             var rowIdx = 0;

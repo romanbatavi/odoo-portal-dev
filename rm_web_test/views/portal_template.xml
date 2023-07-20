@@ -266,7 +266,23 @@
                                             <body>
                                                 <div class="container pt-4">
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered">
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label">Name</label>
+                                                            <select id="vendor" class="form-control" style="width: 580px; height: 38px;">
+                                                                <t t-foreach="vendor" t-as="vendor_name">
+                                                                    <option t-att-value="vendor_name.id" t-esc="vendor_name.name"/>
+                                                                </t>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label">Price</label>
+                                                            <input style="width: 580px; height: 38px;" type="char" class="form-control" name="price" id="price"/>
+                                                        </div>
+                                                        <div class="form-outline mb-4">
+                                                            <label class="form-label">Delivery Lead Time</label>
+                                                            <input style="width: 580px; height: 38px;" type="char" class="form-control" name="dlt" id="dlt"/>
+                                                        </div>
+                                                        <!-- <table class="table table-bordered">
                                                             <thead>
                                                                 <tr class="table-primary">
                                                                     <th class="text-center">Vendor</th>
@@ -276,7 +292,6 @@
                                                             </thead>
                                                             <tbody id="tbody-modal">
                                                                 <td>
-                                                                    <!-- <input type="char" class="form-control" name="vendor" id="vendor"/> -->
                                                                     <select id="vendor" class="form-control" style="width: 170px; height: 35px;">
                                                                         <t t-foreach="vendor" t-as="vendor_name">
                                                                             <option t-att-value="vendor_name.id" t-esc="vendor_name.name"/>
@@ -290,7 +305,7 @@
                                                                     <input type="char" class="form-control" name="dlt" id="dlt"/>
                                                                 </td>
                                                             </tbody>
-                                                        </table>
+                                                        </table> -->
                                                     </div>
                                                 </div>
                                             </body>
