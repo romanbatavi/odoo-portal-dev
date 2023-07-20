@@ -291,7 +291,7 @@
                                             </body>
                                         </div>
                                         <!-- Modal footer -->
-                                        <button class="btn btn-md btn-primary" id="addBtn" type="button">Add Row</button>
+                                        <!-- <button class="btn btn-md btn-primary" id="addBtn" type="button">Add Row</button> -->
                                         <div class="modal-footer">
                                             <button id="close-modal" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                             <button id="save-modal" type="button" class="btn btn-primary" title="Save">Save</button>

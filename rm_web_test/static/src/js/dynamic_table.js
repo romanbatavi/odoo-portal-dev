@@ -21,11 +21,25 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
             </tr>`);
         },
         
-        _onSaveModal: function () {
+        _onSaveModal() {
+            var flag_error = false;
             var vendor = $('#vendor').val();
             var price = $('#price').val();
             var dlt = $('#dlt').val();
             var rowIdx = 0;
+            if ($('#vendor').val() === "") {
+                flag_error = true;
+                window.alert("Field Vendor Masih Kosong");
+            }
+            if ($('#price').val() === "") {
+                flag_error = true;
+                window.alert("Field Price Masih Kosong");
+            }
+            if ($('#dlt').val() === "") {
+                flag_error = true;
+                window.alert("Field DLT Masih Kosong");
+            }
+            if (flag_error == false) {
             $('#tbody').append(`<tr id="R${++rowIdx}">
                 <td>${vendor}</td>
                 <td>${price}</td>
@@ -37,6 +51,7 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
             $('#dlt').val('');
 
             $('#myModal').modal('hide');
+        }
         },
     });
     
