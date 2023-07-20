@@ -1,18 +1,51 @@
-$(document).ready(function() {
-    $(".add-row").click(function() {
-      var name = $("#name").val();
-      var email = $("#email").val();
-      var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + name + "</td><td>" + email + "</td></tr>";
-      $("table tbody").append(markup);
+odoo.define('rm_web_test.dynamictableeeee', function (require) {
+    'use strict';
+    var core = require('web.core');
+    var publicWidget = require('web.public.widget');
+    var ajax = require('web.ajax');
+    var QWeb = core.qweb;
+
+    publicWidget.registry.AddRowModal = publicWidget.Widget.extend({
+        selector: '.modal',
+        events : {
+            'click #addBtn': '_onAddBtn',
+            'click #save-modal': '_onSaveModal',
+        },
+
+        _onAddBtn() {
+            var rowIdx = 0;
+            $('#tbody-modal').append(`<tr id="R${++rowIdx}">
+                <td><input type="text" class="vendor-input form-control"/></td>
+                <td><input type="text" class="price-input form-control"/></td>
+                <td><input type="text" class="dlt-input form-control"/>
+            </tr>`);
+        },
+        
+        _onSaveModal: function () {
+            var vendor = $('#vendor').val();
+            var price = $('#price').val();
+            var dlt = $('#dlt').val();
+            var rowIdx = 0;
+            $('#tbody').append(`<tr id="R${++rowIdx}">
+                <td>${vendor}</td>
+                <td>${price}</td>
+                <td>${dlt}</td>
+            </tr>`);
+
+            $('#vendor').val('');
+            $('#price').val('');
+            $('#dlt').val('');
+
+            $('#myModal').modal('hide');
+        },
     });
- 
-    // Find and remove selected table rows
-    $(".delete-row").click(function() {
-      $("table tbody").find('input[name="record"]').each(function() {
-        if ($(this).is(":checked")) {
-          $(this).parents("tr").remove();
+    
+    publicWidget.registry.OnClickSaveRecord = publicWidget.Widget.extend({
+        selector: '.class-create-product',
+        events : {'click #submit-button': '_onClickSave'},
+
+        _onClickSave() {
+            console.log("=================================================================")
         }
-      });
     });
-  });
- 
+});
