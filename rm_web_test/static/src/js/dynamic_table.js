@@ -23,8 +23,8 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
         
         _onSaveModal() {
             var flag_error = false;
-            var vendor = $('#vendor').val();
-            var vendor_string = $('#vendor:selected').text();
+            var vendor = $('#vendor :selected').val();
+            var vendor_string = $('#vendor :selected').text();
             var price = $('#price').val();
             var dlt = $('#dlt').val();
             var rowIdx = 0;
@@ -41,19 +41,33 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
                 window.alert("Field DLT Masih Kosong");
             }
             if (flag_error == false) {
-            $('#tbody').append(`<tr id="R${++rowIdx}">
-                <td>${vendor}</td>
-                <td>${price}</td>
-                <td>${dlt}</td>
-            </tr>`);
+                $('#tbody').append(`<tr id="R${++rowIdx}">
+                <td style="text-align: center;"><div class="row_fix" edit_type="click" col_name="vendor" data-value="${vendor}"> ${vendor_string}</div></td>
+                <td style="text-align: center;"><div class="row_data" edit_type="click" col_name="price">${price}</div></td>
+                <td style="text-align: center;"><div class="row_data" edit_type="click" col_name="delay">${dlt}</div></td>
+                </tr>`);
+                
+                $('#vendor').val('');
+                $('#price').val('');
+                $('#dlt').val('');
 
-            $('#vendor').val('');
-            $('#price').val('');
-            $('#dlt').val('');
+                $('#myModal').modal('hide');
+            }
+            },
+        //     if (flag_error == false) {
+        //     $('#tbody').append(`<tr id="R${++rowIdx}">
+        //         <td>${vendor}</td>
+        //         <td>${price}</td>
+        //         <td>${dlt}</td>
+        //     </tr>`);
 
-            $('#myModal').modal('hide');
-        }
-        },
+        //     $('#vendor').val('');
+        //     $('#price').val('');
+        //     $('#dlt').val('');
+
+        //     $('#myModal').modal('hide');
+        // }
+        // },
         
     });
     
