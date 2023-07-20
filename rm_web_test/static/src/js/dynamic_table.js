@@ -23,7 +23,8 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
         
         _onSaveModal() {
             var flag_error = false;
-            var vendor = $('#vendor').val();
+            var vendor = $('#vendor:selected').val();
+            var vendor_string = $('#vendor: selected').text();
             var price = $('#price').val();
             var dlt = $('#dlt').val();
             var rowIdx = 0;
@@ -53,6 +54,7 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
             $('#myModal').modal('hide');
         }
         },
+        
     });
     
     publicWidget.registry.OnClickSaveRecord = publicWidget.Widget.extend({
@@ -60,7 +62,34 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
         events : {'click #submit-button': '_onClickSave'},
 
         _onClickSave() {
-            console.log("=================================================================")
+            var tbl_row = $(this).closest('tr');
+            if (tbl_row.data('state') != 'new') {
+                $(this).closest('tr').data('state', 'update').attr('data-state', 'update');
+                }
+
+            var row_id = tbl_row.attr('row_id');
+
+            //hide save and cacel buttons
+            // tbl_row.find('.btn_save_employment').hide();
+
+            //show edit button
+            // tbl_row.find('.btn_edit_employment').show();
+            // tbl_row.find('.btn_delete_employment').show();
+
+            //make the whole row editable
+            tbl_row.find('.row_data')
+                .attr('edit_type', 'click')
+                .attr('contenteditable', 'false')
+                .removeClass('bg-warning')
+                .css('padding', '');
+
+            //--->get row data > start
+            var arr = {};
+            tbl_row.find('.row_data').each(function (index, val) {
+                var col_name = $(this).attr('col_name');
+                var col_val = $(this).html();
+                arr[col_name] = col_val;
+        });
         }
     });
 });

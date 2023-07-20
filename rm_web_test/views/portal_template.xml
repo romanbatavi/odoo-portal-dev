@@ -276,7 +276,12 @@
                                                             </thead>
                                                             <tbody id="tbody-modal">
                                                                 <td>
-                                                                    <input type="char" class="form-control" name="vendor" id="vendor"/>
+                                                                    <!-- <input type="char" class="form-control" name="vendor" id="vendor"/> -->
+                                                                    <select id="vendor" class="form-control" style="width: 170px; height: 35px;">
+                                                                        <t t-foreach="vendor" t-as="vendor_name">
+                                                                            <option t-att-value="vendor_name.id" t-esc="vendor_name.name"/>
+                                                                        </t>
+                                                                    </select>
                                                                 </td>
                                                                 <td>
                                                                     <input type="char" class="form-control" name="price" id="price"/>

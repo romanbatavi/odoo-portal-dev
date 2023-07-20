@@ -63,8 +63,10 @@ class WebTestPortal(CustomerPortal):
 
     @http.route(['/my/tes_product/new_tes_product'], methods=["POST","GET"], type='http', auth="user", website=True)
     def new_tes_product(self, **kw):
-        prod = request.env['product.product'].search([])
-        vals = {'products': prod, 'page_name':'view_create_form_tes_product'}
+        prod = request.env['product.product'].sudo().search([])
+        vendor = request.env['res.partner'].sudo().search([])
+        vals = {'products': prod, 'vendor': vendor, 'page_name':'view_create_form_tes_product'}
+
         if request.httprequest.method == 'POST':
             error_list = []
             if not kw.get("name"):
