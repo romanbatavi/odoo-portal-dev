@@ -42,9 +42,9 @@ class WebTestPortal(CustomerPortal):
     
     @http.route(['/my/tes_product'], type='http', website=True)
     def tes_product(self, **kw):
-        product_obj = request.env['product.product']
-        products = product_obj.search([])
-        vals = {'products':products, 'page_name':'view_tes_product'}
+        products = request.env['product.product'].sudo().search([])
+        vendor = request.env['res.partner'].sudo().search([])
+        vals = {'products':products, 'vendor':vendor, 'page_name':'view_tes_product'}
         return request.render('rm_web_test.view_tes_product', vals)
     
     @http.route(['/my/tes_product/<model("product.product"):product_id>'], type='http', website=True)
