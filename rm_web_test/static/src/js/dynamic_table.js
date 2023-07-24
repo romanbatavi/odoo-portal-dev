@@ -1,17 +1,22 @@
 odoo.define('rm_web_test.dynamictableeeee', function (require) {
     'use strict';
+
+
     var core = require('web.core');
     var publicWidget = require('web.public.widget');
+    var core = require('web.core');
+    var utils = require('web.utils');
     var ajax = require('web.ajax');
-    var QWeb = core.qweb;
+    var _t = core._t;
 
-    publicWidget.registry.AddRowModal = publicWidget.Widget.extend({
+    publicWidget.registry.ModalCreateProduct = publicWidget.Widget.extend({
         selector: '.modal',
-        events : {
+        events: {
             'click #addBtn': '_onAddBtn',
             'click #save-modal': '_onSaveModal',
         },
 
+        // INI ENGGA KEPAKE
         _onAddBtn() {
             var rowIdx = 0;
             $('#tbody-modal').append(`<tr id="R${++rowIdx}">
@@ -20,14 +25,16 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
                 <td><input type="text" class="dlt-input form-control"/>
             </tr>`);
         },
-        
+
         _onSaveModal() {
             var flag_error = false;
-            var vendor = $('#vendor :selected').val();
-            var vendor_string = $('#vendor :selected').text();
+            var vendor = $('#vendor').val();
             var price = $('#price').val();
             var dlt = $('#dlt').val();
             var rowIdx = 0;
+            // buat validasinya tolong dibikin kaya contoh di bawah ini ya
+            // https://getbootstrap.com/docs/4.6/components/forms/#server-side
+            // https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_form_validation_needs&stacked=h
             if ($('#vendor').val() === "") {
                 flag_error = true;
                 window.alert("Field Vendor Masih Kosong");
@@ -40,70 +47,55 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
                 flag_error = true;
                 window.alert("Field DLT Masih Kosong");
             }
+
+            // INSERT BIAR TABLE DINAMIS
             if (flag_error == false) {
                 $('#tbody').append(`<tr id="R${++rowIdx}">
-                <td style="text-align: center;"><div class="row_fix" edit_type="click" col_name="vendor" data-value="${vendor}"> ${vendor_string}</div></td>
-                <td style="text-align: center;"><div class="row_data" edit_type="click" col_name="price">${price}</div></td>
-                <td style="text-align: center;"><div class="row_data" edit_type="click" col_name="delay">${dlt}</div></td>
-                </tr>`);
-                
+                <td data-vendor="${vendor}"><span col_name="vendor">${vendor}</span></td>
+                <td data-price="${price}"><span col_name="price">${price}</span></td>
+                <td data-dlt="${dlt}"><span col_name="dlt">${dlt}</span></td>
+            </tr>`);
+
                 $('#vendor').val('');
                 $('#price').val('');
                 $('#dlt').val('');
 
                 $('#myModal').modal('hide');
             }
-            },
-        //     if (flag_error == false) {
-        //     $('#tbody').append(`<tr id="R${++rowIdx}">
-        //         <td>${vendor}</td>
-        //         <td>${price}</td>
-        //         <td>${dlt}</td>
-        //     </tr>`);
+        },
+    })
 
-        //     $('#vendor').val('');
-        //     $('#price').val('');
-        //     $('#dlt').val('');
-
-        //     $('#myModal').modal('hide');
-        // }
-        // },
-        
-    });
-    
     publicWidget.registry.OnClickSaveRecord = publicWidget.Widget.extend({
         selector: '.class-create-product',
-        events : {'click #submit-button': '_onClickSave'},
+        events: {
+            'click #submit-button': '_onClickSave',
+        },
 
         _onClickSave() {
-            var tbl_row = $(this).closest('tr');
-            if (tbl_row.data('state') != 'new') {
-                $(this).closest('tr').data('state', 'update').attr('data-state', 'update');
-                }
+            var lines = []
+            var product_name = $('#product-name').val()
+            var barcode = $('#barcode').val()
+            var default_code = $('#default_code').val()
+            var lst_price = $('#lst_price').val()
 
-            var row_id = tbl_row.attr('row_id');
+            $('#tbody > tr').each(function () {
+                lines.push({
+                    'vendor': $(this).find("span[col_name='vendor']").text(),
+                    'price': $(this).find("span[col_name='price']").text(),
+                    'delay': $(this).find("span[col_name='dlt']").text(),
+                })
+            });
 
-            //hide save and cacel buttons
-            // tbl_row.find('.btn_save_employment').hide();
-
-            //show edit button
-            // tbl_row.find('.btn_edit_employment').show();
-            // tbl_row.find('.btn_delete_employment').show();
-
-            //make the whole row editable
-            tbl_row.find('.row_data')
-                .attr('edit_type', 'click')
-                .attr('contenteditable', 'false')
-                .removeClass('bg-warning')
-                .css('padding', '');
-
-            //--->get row data > start
-            var arr = {};
-            tbl_row.find('.row_data').each(function (index, val) {
-                var col_name = $(this).attr('col_name');
-                var col_val = $(this).html();
-                arr[col_name] = col_val;
-        });
-        }
+            ajax.jsonRpc('/my/tes_product/new_tes_product/add_product', 'call', {
+                'name': product_name,
+                'barcode': barcode,
+                'default_code': default_code,
+                'list_price': lst_price,
+                'seller_ids': lines
+            }).then(function (result) {
+                window.location.href = "/my/tes_product/new_tes_product";
+                // logic setelah post data, bisa diganti sama redirect ke halaman lain atau muncul modal kalo data berhasil ditambahkan
+            })
+        },
     });
 });
