@@ -195,7 +195,10 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                            <input type="char" class="form-control" name="name" id="product_name"/>
+                                            <input type="char" class="form-control" name="name" id="product_name" />
+                                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                                Product Masih Kosong
+                                            </div>
                                         </div>
                                     </div>
                                     <hr>

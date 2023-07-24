@@ -26,7 +26,7 @@ odoo.define('rm_web_test.insert_image', function (require) {
                     test.attr('src', e.target.result).fadeIn('slow');
                     var data = reader.result;
                     var img_base64 = data.split(",")[1];
-                    console.log("<><><><><", img_base64)
+                    console.log("=======================================================", img_base64)
                     document.querySelector("#base64_picture").value = img_base64;
                     base64_pic.val = img_base64
                 };

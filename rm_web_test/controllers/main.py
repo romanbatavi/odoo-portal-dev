@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import base64
+from base64 import b64decode, b64encode
 from odoo import http, SUPERUSER_ID, fields, _
 from odoo.addons.auth_oauth.controllers.main import OAuthLogin
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
@@ -16,7 +17,6 @@ from werkzeug.exceptions import NotFound
 import logging
 import re
 import random
-import base64
 import smtplib
 import requests
 import uuid
@@ -37,11 +37,12 @@ class WebTestRM(http.Controller):
         ProductSupplier = request.env['product.supplierinfo']
 
         if kw:
+            temp_gambar = kw.get("base64_picture")
+            gambar = base64.b64decode(temp_gambar)
             name = kw.get('name')
             default_code = kw.get('default_code')
             barcode = kw.get('barcode') 
             list_price = kw.get('list_price')
-            image_1920: kw.get("base64_picture")
             # product_id = False
             seller_ids = []
             try:
@@ -56,9 +57,11 @@ class WebTestRM(http.Controller):
                     'default_code': default_code,
                     'barcode': barcode,
                     'list_price': float(list_price),
-                    'image_1920': image_1920,
+                    'image_1920': gambar,
                     'seller_ids': seller_ids
                 })
+            # except Exception as e:
+            #     print("=======================================================",e)
             except:
                 raise ValidationError('error input data product')
         return {'data':{}}

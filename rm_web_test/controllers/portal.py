@@ -16,28 +16,28 @@ class WebTestPortal(CustomerPortal):
         prod = request.env['product.product'].sudo().search([])
         vendor = request.env['res.partner'].sudo().search([])
         vals = {'products': prod, 'vendor': vendor, 'page_name':'view_create_form_tes_product'}
-        if request.httprequest.method == 'POST':
-            error_list = []
-            if not kw.get("name"):
-                error_list.append("Name Field Is Empty")
-            if not kw.get("barcode"):
-                error_list.append("Barcode Field Is Empty")
-            if not kw.get("default_code"):
-                error_list.append("Default Code Field Is Empty")
-            if not kw.get("lst_price"):
-                error_list.append("Price Field Is Empty")
-            if not error_list:
-                request.env['product.product'].create({
-                    "name": kw.get("name"),
-                    "barcode": kw.get("barcode"),
-                    "default_code": kw.get("default_code"),
-                    "lst_price": kw.get("lst_price"),
-                    "image_1920": kw.get("base64_picture"),
-                })
-                success = "Insert Product Success"
-                vals['success_message'] = success
-            else:
-                vals['error_list'] = error_list
+        # GA KEPAKE
+        # if request.httprequest.method == 'POST':
+        #     error_list = []
+        #     if not kw.get("name"):
+        #         error_list.append("Name Field Is Empty")
+        #     if not kw.get("barcode"):
+        #         error_list.append("Barcode Field Is Empty")
+        #     if not kw.get("default_code"):
+        #         error_list.append("Default Code Field Is Empty")
+        #     if not kw.get("lst_price"):
+        #         error_list.append("Price Field Is Empty")
+        #     if not error_list:
+        #         request.env['product.product'].create({
+        #             "name": kw.get("name"),
+        #             "barcode": kw.get("barcode"),
+        #             "default_code": kw.get("default_code"),
+        #             "lst_price": kw.get("lst_price"),
+        #         })
+        #         success = "Insert Product Success"
+        #         vals['success_message'] = success
+        #     else:
+        #         vals['error_list'] = error_list
         return request.render('rm_web_test.view_create_form_tes_product', vals)
     
     @http.route(['/my/tes_product'], type='http', website=True)
