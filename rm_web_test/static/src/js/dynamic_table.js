@@ -73,10 +73,11 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
 
         _onClickSave() {
             var lines = []
-            var product_name = $('#product-name').val()
+            var product_name = $('#product_name').val()
             var barcode = $('#barcode').val()
             var default_code = $('#default_code').val()
             var lst_price = $('#lst_price').val()
+            var base64_picture = $('#base64_picture').val()
 
             $('#tbody > tr').each(function () {
                 lines.push({
@@ -91,6 +92,7 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
                 'barcode': barcode,
                 'default_code': default_code,
                 'list_price': lst_price,
+                'base64_picture': base64_picture,
                 'seller_ids': lines
             }).then(function (result) {
                 window.location.href = "/my/tes_product/new_tes_product";

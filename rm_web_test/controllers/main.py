@@ -41,6 +41,7 @@ class WebTestRM(http.Controller):
             default_code = kw.get('default_code')
             barcode = kw.get('barcode') 
             list_price = kw.get('list_price')
+            image_1920: kw.get("base64_picture")
             # product_id = False
             seller_ids = []
             try:
@@ -55,6 +56,7 @@ class WebTestRM(http.Controller):
                     'default_code': default_code,
                     'barcode': barcode,
                     'list_price': float(list_price),
+                    'image_1920': image_1920,
                     'seller_ids': seller_ids
                 })
             except:
