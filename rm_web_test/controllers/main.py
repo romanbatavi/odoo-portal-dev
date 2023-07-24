@@ -37,8 +37,8 @@ class WebTestRM(http.Controller):
         ProductSupplier = request.env['product.supplierinfo']
 
         if kw:
-            temp_gambar = kw.get("base64_picture")
-            gambar = base64.b64decode(temp_gambar)
+            # temp_gambar = kw.get("base64_picture")
+            # gambar = base64.b64decode(temp_gambar)
             name = kw.get('name')
             default_code = kw.get('default_code')
             barcode = kw.get('barcode') 
@@ -57,7 +57,7 @@ class WebTestRM(http.Controller):
                     'default_code': default_code,
                     'barcode': barcode,
                     'list_price': float(list_price),
-                    'image_1920': gambar,
+                    'image_1920': kw.get("base64_picture"),
                     'seller_ids': seller_ids
                 })
             # except Exception as e:
