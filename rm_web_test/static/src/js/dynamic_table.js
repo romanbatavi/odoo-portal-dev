@@ -33,7 +33,7 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
             var dlt = $('#dlt').val();
             var rowIdx = 0;
             // buat validasinya tolong dibikin kaya contoh di bawah ini ya
-            // https://getbootstrap.com/docs/4.6/components/forms/#server-side
+            // https://getbootstrap.com/docs/4.6/components/forms/#server-sidew
             // https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_form_validation_needs&stacked=h
             if ($('#vendor').val() === "") {
                 flag_error = true;
@@ -51,7 +51,7 @@ odoo.define('rm_web_test.dynamictableeeee', function (require) {
             // INSERT BIAR TABLE DINAMIS
             if (flag_error == false) {
                 $('#tbody').append(`<tr id="R${++rowIdx}">
-                <td data-vendor="${vendor}"><span col_name="vendor">${vendor}</span></td>
+                <td data-vendor="${vendor}" style="display: none;"><span col_name="vendor">${vendor}</span></td>
                 <td data-price="${price}"><span col_name="price">${price}</span></td>
                 <td data-dlt="${dlt}"><span col_name="dlt">${dlt}</span></td>
             </tr>`);
